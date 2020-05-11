@@ -1,0 +1,16 @@
+import axios from 'axios'
+
+const baseUrl = 'http://localhost:3001/api/'
+
+const getData = async () => {
+  const response = await axios.get(`${baseUrl}infections`)
+  return response.data
+}
+
+const getHospitalisedData = async () => {
+  const response = await axios.get(`${baseUrl}hospitalised`)
+  return response.data
+}
+
+
+export default { getData, getHospitalisedData }
