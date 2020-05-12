@@ -22,7 +22,6 @@ const BasicAreaChart = ({ data }) => {
             interval='preserveEnd'
             domain={['dataMin', 'dataMax']}
             angle={40}
-
             tickFormatter={(unixTime) => moment(unixTime).format('MMMM-DD')}
             style={{ textAnchor: 'start' }}
           />

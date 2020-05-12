@@ -12,5 +12,10 @@ const getHospitalisedData = async () => {
   return response.data
 }
 
+const getDeathsData = async () => {
+  const response = await axios.get(`${baseUrl}deaths`)
+  return response.data
+}
 
-export default { getData, getHospitalisedData }
+
+export default { getData, getHospitalisedData, getDeathsData }

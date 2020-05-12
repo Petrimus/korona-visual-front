@@ -1,14 +1,12 @@
 import React from 'react'
-import { Loader, Dropdown, Menu } from 'semantic-ui-react'
+import { Loader } from 'semantic-ui-react'
 
-import Button from '../reusables/Button'
-import ViewTopItem from './ViewTopItem'
-import BasicLinechart from '../charts/BasicLinechart'
-import BasicAreaChart from '../charts/BasicAreaChart'
-
+import ViewTop from './ViewTop'
+import InfectionsView from './InfectionsView'
+import HospitalisedView from './HospitalisedView'
+import ExitusView from './ExitusView'
 import { ViewLayout } from '../styles/appLayouts'
-import { StyledViewTop, StyledViewOptions } from '../styles/viewStyles'
-
+import BasicBarchart from '../charts/BasicBarchart'
 
 const View = ({
   active,
@@ -18,10 +16,35 @@ const View = ({
   handleCumulativeClick,
   cumulative,
   districtChange,
-  districtToShow
+  districtToShow,
+  viewSelect
 }) => {
   // console.log('topview ',topView)
   // console.log('topview ', props.topView[2])
+  // console.log('view viewSelect', viewSelect)
+  console.log('data', data)
+
+
+  const viewToShow = () => {
+    if (viewSelect === 'infections') {
+      return (
+        <InfectionsView
+          data={data}
+          districts={districts}
+          handleCumulativeClick={handleCumulativeClick}
+          cumulative={cumulative}
+          districtChange={districtChange}
+          districtToShow={districtToShow}
+        />
+      )
+
+    } else if (viewSelect === 'hospitalised') {
+      return <BasicBarchart data={data} />
+
+    } else if (viewSelect === 'exitus') {
+      return <ExitusView />
+    }
+  }
 
   if (active) {
     return (
@@ -30,50 +53,16 @@ const View = ({
       </ViewLayout>
     )
   }
+
   if (!active) {
     return (
       <ViewLayout>
-        <StyledViewTop>
-          <ViewTopItem border
-            text='Tartunnat yhteensä '
-            displayData={topView[0]}
-          />
-          <ViewTopItem border
-            text='Tartunnat viim. 7 pv. '
-            displayData={topView[1]}
-
-          />
-          <ViewTopItem border
-            text='Tartunnat eilen '
-            displayData={topView[2]}
-          />
-          <ViewTopItem text='Tartunnat suunta '
-            displayData={topView[3]}
-          />
-        </StyledViewTop>
-        <StyledViewOptions>
-          <Menu >
-            <Dropdown
-              placeholder={districtToShow}
-              options={districts}
-              search selection
-              onChange={districtChange}
-            />
-          </Menu>
-          <Button
-            color='violet'
-            handleButtonClick={handleCumulativeClick}
-          >
-            {cumulative ? 'näytä yksittäin' : 'Näytä kumulatiivisesti'}
-          </Button>
-        </StyledViewOptions>
-        {cumulative ? <BasicAreaChart data={data} /> :
-          <BasicLinechart data={data} />
-        }
+        <ViewTop topView={topView} />
+        {viewToShow()}
       </ViewLayout >
     )
   }
-}
 
+}
 export default View
 

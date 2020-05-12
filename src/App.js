@@ -24,6 +24,7 @@ const App = () => {
   const [showCumulative, setShowCumulative] = useState(false)
   const [districtToShow, setDistrictToShow] = useState('Kaikki sairaanhoitopiirit')
   const [hospitalisedData, setHospitalisedData] = useState(null)
+  const [deathsData, setDeathsData] = useState(null)
 
   useEffect(() => {
     dataServices.getData().then(data => {
@@ -42,6 +43,12 @@ const App = () => {
     })
   }, [])
 
+  useEffect(() => {
+    dataServices.getDeathsData().then(data => {
+      
+    })
+  })
+
   // console.log('hospitalized', hospitalizedData)
 
   const dataSelect = () => {
@@ -57,7 +64,7 @@ const App = () => {
         return arrangeCumulativeValueChart(infections)
       }
     } else if (viewSelect === 'hospitalised') {
-      return hospitalisedData
+      return hospitalisedData.slice(hospitalisedData.length - 21, hospitalisedData.length - 1)
     }
   }
 
@@ -72,13 +79,21 @@ const App = () => {
   }
   // console.log('med districts', medDistricts)
 
+  const handleOptionChange = (value) => () => {
+    console.log('value', value)
+
+    setViewSelect(value)
+  }
+  // console.log('view select', viewSelect)
+  console.log('hospitalised', hospitalisedData)
+
   console.log('app render')
 
   return (
     <ThemeProvider theme={theme}>
       <AppLayoutGrid>
         <Header />
-        <Menu />
+        <Menu handleOptionChange={handleOptionChange} />
         <View active={loading}
           data={dataSelect()}
           topView={topViewItemData}
@@ -87,6 +102,7 @@ const App = () => {
           cumulative={showCumulative}
           districtToShow={districtToShow}
           districtChange={handleDistrictChange}
+          viewSelect={viewSelect}
         />
         <Footer />
       </AppLayoutGrid>

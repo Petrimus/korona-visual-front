@@ -1,26 +1,7 @@
-/*
-const parseDate = (isoDate) => {
-  // console.log('parsedate')
 
-  const month = ['tammi', 'helmi', 'maalis', 'huhti', 'touko', 'kesä', 'heinä', 'elo', 'syys', 'loka', 'marras', 'joulu']
-  const newDate = isoDate.replace(
-    /(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}).(\d{3})(\w{1})/,
-    ($0, $1, $2, $3) => {
-
-      return month[$2 - 1] + ' ' + $3
-    }
-  )
-  return newDate
-}
-*/
-// month[$2 -1] + ' ' + $3
-// "2020-01-02T15:00:00.000Z"
-
-const lastValueIndex = (data) => {
+const lastIndexNotZero = (data) => {
   let index = data.length - 1
   for (index; index >= 0; index--) {
-    console.log('data at index', data[index])
-
     if (data[index].value !== 0) {
       return index
     }
@@ -28,8 +9,8 @@ const lastValueIndex = (data) => {
 }
 
 export const calculateTopItemData = (data) => {
-  const lastIndex = lastValueIndex(data)
-  console.log('last index', lastIndex)
+  const lastIndex = lastIndexNotZero(data)
+  // console.log('last index', lastIndex)
 
   let dataArray = []
   dataArray.push(
@@ -41,8 +22,8 @@ export const calculateTopItemData = (data) => {
     return sum + day.value
   }, 0))
 
-  console.log('last index', lastIndex)
-  console.log('data 131', data[51])
+  // console.log('last index', lastIndex)
+  // console.log('data 131', data[51])
 
   dataArray.push(data[lastIndex].value)
 
@@ -55,14 +36,26 @@ export const calculateTopItemData = (data) => {
 }
 
 export const arrangeSingleValueChart = (data) => {
-  const array = data.map(day => {
-    const newObject = {
+  const lastIndex = lastIndexNotZero(data)
+  const retAry = []
+  for (let index = 0; index <= lastIndex; index++) {
+    const day = data[index]
+    const obj = {
       date: Date.parse(day.date),
-      value: day.value,
+      value: day.value
     }
-    return newObject
-  })
-  return array
+    let sum = 0
+    if (index > 6) {
+      for (let j = 7; j > 0; j--) {
+        sum += data[index - j].value
+      }
+      const avg = Math.round(sum / 7)
+      obj.movAvg = avg
+    }
+    retAry.push(obj)
+  }
+
+  return retAry
 }
 
 export const arrangeCumulativeValueChart = (data) => {
@@ -91,7 +84,4 @@ export const isolateMedicalDictricts = (data) => {
   })
   return retArray
 }
-
-
-// 2020-01-01T15:00:00.000Z  , "+$1+" - "+$4%12+":"+$5+(+$4>12?"PM":"AM")+" "+$6
 

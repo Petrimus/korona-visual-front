@@ -27,7 +27,7 @@ margin: 10px;
 
 const ViewTopItem = (props) => {
   const showBorder = props.border ? true : false
-  console.log('border', showBorder)
+  // console.log('border', showBorder)
 
   return (
     <StyledItemContainer border={showBorder}>

@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 
-import { LineChart, XAxis, YAxis, Tooltip, Label, CartesianGrid, Line, ResponsiveContainer } from 'recharts'
+import { LineChart, XAxis, YAxis, Tooltip, Legend, Label, CartesianGrid, Line, ResponsiveContainer } from 'recharts'
 import { ChartContainer } from '../styles/chartStyles'
 
 const BasicLinechart = ({ data }) => {
@@ -38,7 +38,8 @@ const BasicLinechart = ({ data }) => {
               style={{ textAnchor: 'middle' }}
             />
           </YAxis>
-          <Tooltip />
+          <Tooltip labelFormatter={(unixTime) => moment(unixTime).format('MMMM-DD')} />
+          <Legend verticalAlign='top' />
           <defs>
             <linearGradient id='value' x1="0%" y1="100%" x2="0%" y2="0%">
               <stop offset="0%" stopColor="#540d6e" />
@@ -49,11 +50,20 @@ const BasicLinechart = ({ data }) => {
             </linearGradient>
           </defs>
           <Line
+            name='tartunnat'
             dataKey='value'
             dot={false}
             type={'monotone'}
-            stroke="url(#value)"
-            strokeWidth="3px"
+            stroke='url(#value)'
+            strokeWidth='3px'
+          />
+          <Line
+            name='7 pv liukuva keskiarvo'
+            dataKey='movAvg'
+            dot={false}
+            type={'natural'}
+            stroke='#E3AFBC'
+            strokeWidth='3px'
           />
         </LineChart>
       </ResponsiveContainer>

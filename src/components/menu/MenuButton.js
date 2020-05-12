@@ -1,11 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const MenuButton = (props) => {
+const MenuButton = ({ handleOptionChange, value, children }) => {
 
   return (
-    <StyledMenuButton>
-      { props.children } 
+    <StyledMenuButton
+      value={value}
+      onClick={handleOptionChange(value)}>
+      {children}
     </StyledMenuButton>
   )
 }
