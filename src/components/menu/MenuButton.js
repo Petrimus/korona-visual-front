@@ -1,11 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const MenuButton = ({ handleOptionChange, value, children }) => {
+const MenuButton = ({ handleOptionChange, value, children, pressed }) => {
+  console.log('pressed ', pressed)
 
 
   return (
     <StyledMenuButton
+      pressed={pressed}
       value={value}
       onClick={handleOptionChange(value)}>
       {children}
@@ -14,6 +16,7 @@ const MenuButton = ({ handleOptionChange, value, children }) => {
 }
 
 export default MenuButton
+
 
 const StyledMenuButton = styled.button`
   display: block;
@@ -26,9 +29,13 @@ const StyledMenuButton = styled.button`
   border-radius: 10px;   
   font-weight: 300;
   outline-style: none;
-  font: ${props => props.theme.font};
-  background-color: ${props => props.theme.lightPink};
+  color: ${props => props.pressed ? 'white' : 'black'};
+  background-color: ${props =>
+    props.pressed ? props => props.theme.violet :
+      props => props.theme.lightPink};
+  
+ 
 
 
 `
-
+/* ${props => props.theme.lightPink}; */

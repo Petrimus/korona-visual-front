@@ -76,7 +76,6 @@ const App = () => {
   }
 
   const handleCumulativeButtonClick = (name) => () => {
-    // console.log('cumulative', name)
     if (name === 'infections') { setCumulativeInfections(!cumulativeInfections) }
     if (name === 'exitus') { setCumulativeExitus(!cumulativeExitus) }
   }
@@ -96,15 +95,16 @@ const App = () => {
   // console.log('hook top view ', topViewData)
   // console.log('exitus ', exitusData)
 
-
-
   console.log('app render')
 
   return (
     <ThemeProvider theme={theme}>
       <AppLayoutGrid>
         <Header />
-        <Menu handleOptionChange={handleOptionChange} />
+        <Menu
+          handleOptionChange={handleOptionChange}
+          buttonPressed={viewSelect}
+        />
         <View active={loading}
           data={dataSelect()}
           topViewData={topViewData}

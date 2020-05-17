@@ -1,6 +1,7 @@
 import axios from 'axios'
 
-const baseUrl = 'http://localhost:3001/api/'
+const baseUrl = '/api/'
+// const longBaseUrl = 'http://localhost:3001/api/'
 
 const getData = async () => {
   const response = await axios.get(`${baseUrl}infections`)
