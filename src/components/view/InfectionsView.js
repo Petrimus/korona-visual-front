@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 
 import { Dropdown, Menu } from 'semantic-ui-react'
-import Button from '../reusables/Button'
 import BasicLinechart from '../charts/BasicLinechart'
 import BasicAreaChart from '../charts/BasicAreaChart'
+
 import { StyledViewOptions } from '../styles/viewStyles'
+import { StandardButton } from '../styles/button'
 
 
 const InfectionView = ({
@@ -33,18 +34,19 @@ const InfectionView = ({
             onChange={districtChange}
           />
         </Menu>
-        <Button
+        <StandardButton
+          name='infections'
           color='violet'
-          handleButtonClick={handleCumulativeClick}
+          onClick={handleCumulativeClick('infections')}
         >
           {cumulative ? 'näytä yksittäin' : 'Näytä kumulatiivisesti'}
-        </Button>
-        <Button
+        </StandardButton>
+        <StandardButton
           color='violet'
-          handleButtonClick={handleShowChange}
+          onClick={handleShowChange}
         >
           {showAll ? 'näytä viimeiset 80 pv' : 'näytä koko sarja'}
-        </Button>
+        </StandardButton>
       </StyledViewOptions>
       {cumulative ? <BasicAreaChart
         data={showAll ? data : data.slice(data.length - 80, data.length)} /> :

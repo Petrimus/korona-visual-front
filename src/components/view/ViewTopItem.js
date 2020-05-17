@@ -1,41 +1,19 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
 
-const StyledItemContainer = styled.div`
-display: flex;
-justify-content: center;
-align-items: center;
-flex-direction: column;
-width: 25%;
+import { StyledItemContainer, ItemValue } from '../styles/viewStyles'
 
-${(props) => props.border && `
-    border-right: 5px solid #5D001E;
-  `}
-`
-
-
-const ItemText = styled.div`
-
-  `
-
-const ItemValue = styled.div`
-font-size: 30px;
-margin: 10px;
-`
-
-
-const ViewTopItem = (props) => {
-  const showBorder = props.border ? true : false
+const ViewTopItem = ({ text, border, displayData }) => {
+  const showBorder = border ? true : false
   // console.log('border', showBorder)
 
   return (
     <StyledItemContainer border={showBorder}>
-      <ItemText>
-        {props.text}
-      </ItemText>
+      <p>
+        {text}
+      </p>
       <ItemValue>
-        <span>{props.displayData}</span>
+        <span style={{ display: 'inline-block' }}>{displayData}</span>
         <span style={{ fontSize: '20px' }}> kpl.</span>
       </ItemValue>
     </StyledItemContainer>
@@ -46,6 +24,7 @@ export default ViewTopItem
 
 ViewTopItem.propTypes = {
   text: PropTypes.string,
+  boreder: PropTypes.bool,
   displayData: PropTypes.number
 }
 

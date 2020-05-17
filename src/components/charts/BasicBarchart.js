@@ -29,10 +29,10 @@ const BasicBarchart = ({ data }) => {
             labelFormatter={(unixTime) => moment(unixTime).format('MMMM-DD')}
           />
           <Legend
-            verticalAlign='top'           
+            verticalAlign='top' height={36}
           />
-          <Bar name='sairaalassa' dataKey='inWard' stackId='a' fill='#5D001E' />
-          <Bar name='tehohoidossa' dataKey='inIcu' stackId='a' fill='#E3AFBC' />
+          <Bar name='Osastolla' dataKey='inWard' stackId='a' fill='#5D001E' />
+          <Bar name='Tehohoidossa' dataKey='inIcu' stackId='a' fill='#E3AFBC' />
         </BarChart>
       </ResponsiveContainer>
     </ChartContainer>

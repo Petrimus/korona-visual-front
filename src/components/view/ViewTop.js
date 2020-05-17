@@ -2,10 +2,14 @@ import React from 'react'
 // import PropTypes from 'prop-types'
 
 import ViewTopItem from './ViewTopItem'
+import ViewTopDirection from './ViewTopDirection'
 import { StyledViewTop } from '../styles/viewStyles'
 
 const ViewTop = ({ topView }) => {
 
+  if (!topView && topView.length === 0) {
+    return null
+  }
 
   return (
 
@@ -20,11 +24,16 @@ const ViewTop = ({ topView }) => {
 
       />
       <ViewTopItem border
-        text='Tartunnat eilen '
+        text='Sairaalahoidossa '
         displayData={topView[2]}
       />
-      <ViewTopItem text='Tartunnat suunta '
+      <ViewTopItem border
+        text='Menehtyneet '
         displayData={topView[3]}
+      />
+      <ViewTopDirection
+        direction={topView[4]}
+        text='tartuntojen trendi'
       />
     </StyledViewTop>
   )

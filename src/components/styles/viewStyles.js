@@ -4,7 +4,7 @@ export const StyledViewTop = styled.div`
 display: flex;
 justify-content: center;
 align-items: center;
-width: 80%;
+width: 90%;
 margin: 1em auto 1em auto;
 
 `
@@ -16,11 +16,26 @@ width: 70%;
 margin: 1em auto 1em auto;
 
 `
-/*
-border-bottom: 3px solid #5D001E;
-display: flex;
-justify-content: space-between;
-align-items: center;
 
-*/
+export const StyledItemContainer = styled.div`
+  width: 20%;  
+  height: 100%;
+  ${(props) => props.border && `
+    border-right: 5px solid #5D001E;
+    `}
+`
 
+export const ItemValue = styled.div` 
+  height: 2em;
+  font-size: 30px;  
+  text-align: center;
+
+  @media (max-width: 1000px) { 
+      font-size: 24px; 
+  }
+
+
+  @media (max-width: 800px) {  
+      font-size: 20px;  
+  }
+`

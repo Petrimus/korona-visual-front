@@ -39,7 +39,7 @@ const BasicLinechart = ({ data }) => {
             />
           </YAxis>
           <Tooltip labelFormatter={(unixTime) => moment(unixTime).format('MMMM-DD')} />
-          <Legend verticalAlign='top' />
+          <Legend verticalAlign='top' height={36} />
           <defs>
             <linearGradient id='value' x1="0%" y1="100%" x2="0%" y2="0%">
               <stop offset="0%" stopColor="#540d6e" />

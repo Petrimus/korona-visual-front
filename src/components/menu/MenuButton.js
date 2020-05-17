@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 const MenuButton = ({ handleOptionChange, value, children }) => {
 
+
   return (
     <StyledMenuButton
       value={value}
@@ -27,5 +28,7 @@ const StyledMenuButton = styled.button`
   outline-style: none;
   font: ${props => props.theme.font};
   background-color: ${props => props.theme.lightPink};
+
+
 `
 

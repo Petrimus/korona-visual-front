@@ -2,16 +2,10 @@ import React, { useState, useEffect } from 'react'
 import dataServices from './services/dataAxios'
 import { ThemeProvider } from 'styled-components'
 import { theme } from './components/styles/theme'
-import {
-  calculateTopItemData,
-  arrangeSingleValueChart,
-  isolateMedicalDictricts,
-  arrangeCumulativeValueChart
-} from './utills/dataFunctions'
-
+import functionUtils from './utills/dataFunctions'
 import { AppLayoutGrid } from './components/styles/appLayouts'
 import Header from './components/Header'
-import Menu from './components/Menu'
+import Menu from './components/menu/Menu'
 import Footer from './components/Footer'
 import View from './components/view/View'
 
@@ -19,20 +13,18 @@ const App = () => {
   const [loading, setLoading] = useState(true)
   const [viewSelect, setViewSelect] = useState('infections')
   const [infectionData, setInfectionData] = useState(null)
-  const [topViewItemData, setTopViewItemData] = useState(null)
-  const [medDistricts, setMedDistricts] = useState(null)
-  const [showCumulative, setShowCumulative] = useState(false)
-  const [districtToShow, setDistrictToShow] = useState('Kaikki sairaanhoitopiirit')
   const [hospitalisedData, setHospitalisedData] = useState(null)
-  const [deathsData, setDeathsData] = useState(null)
+  const [exitusData, setExitusData] = useState(null)
+  const [medDistricts, setMedDistricts] = useState(null)
+  const [cumulativeInfections, setCumulativeInfections] = useState(false)
+  const [cumulativeExitus, setCumulativeExitus] = useState(false)
+  const [districtToShow, setDistrictToShow] = useState('Kaikki sairaanhoitopiirit')
+  const [topViewData, setTopViewData] = useState([])
 
   useEffect(() => {
     dataServices.getData().then(data => {
-      // console.log('data', data)
       setInfectionData(data)
-      const topItemData = data.confirmed['Kaikki sairaanhoitopiirit']
-      setTopViewItemData(calculateTopItemData(topItemData))
-      setMedDistricts(isolateMedicalDictricts(data))
+      setMedDistricts(functionUtils.isolateMedicalDictricts(data))
       setLoading(false)
     })
   }, [])
@@ -45,9 +37,16 @@ const App = () => {
 
   useEffect(() => {
     dataServices.getDeathsData().then(data => {
-      
+      setExitusData(data)
     })
-  })
+  }, [])
+
+  useEffect(() => {
+    if (infectionData === null || hospitalisedData === null || exitusData === null) {
+      return
+    }
+    setTopViewData(functionUtils.contructTopViewData(infectionData, hospitalisedData, exitusData))
+  }, [infectionData, hospitalisedData, exitusData])
 
   // console.log('hospitalized', hospitalizedData)
 
@@ -56,36 +55,48 @@ const App = () => {
       return
     }
     if (viewSelect === 'infections') {
-      if (!showCumulative) {
+      if (!cumulativeInfections) {
         const infections = infectionData.confirmed[districtToShow]
-        return arrangeSingleValueChart(infections)
+        return functionUtils.arrangeDataToSingleValue(infections)
       } else {
         const infections = infectionData.confirmed[districtToShow]
-        return arrangeCumulativeValueChart(infections)
+        return functionUtils.arrangeCumulativeValueChart(infections)
       }
+
     } else if (viewSelect === 'hospitalised') {
       return hospitalisedData.slice(hospitalisedData.length - 21, hospitalisedData.length - 1)
+
+    } else if (viewSelect === 'exitus') {
+      if (!cumulativeExitus) {
+        return functionUtils.arrangeDataToSingleValue(exitusData)
+      } else {
+        return functionUtils.arrangeCumulativeValueChart(exitusData.sort())
+      }
     }
   }
 
-  const handleCumulativeButtonClick = () => {
-    setShowCumulative(!showCumulative)
+  const handleCumulativeButtonClick = (name) => () => {
+    // console.log('cumulative', name)
+    if (name === 'infections') { setCumulativeInfections(!cumulativeInfections) }
+    if (name === 'exitus') { setCumulativeExitus(!cumulativeExitus) }
   }
 
   const handleDistrictChange = (event, { value }) => {
-    // console.log(event)
-    //console.log(value)
     setDistrictToShow(medDistricts[value].text)
   }
-  // console.log('med districts', medDistricts)
 
   const handleOptionChange = (value) => () => {
-    console.log('value', value)
-
     setViewSelect(value)
   }
+
   // console.log('view select', viewSelect)
-  console.log('hospitalised', hospitalisedData)
+  // console.log('hospitalised', hospitalisedData)
+  // console.log('exitus data ', exitusData)
+  // console.log('infections ', infectionData)
+  // console.log('hook top view ', topViewData)
+  // console.log('exitus ', exitusData)
+
+
 
   console.log('app render')
 
@@ -96,10 +107,11 @@ const App = () => {
         <Menu handleOptionChange={handleOptionChange} />
         <View active={loading}
           data={dataSelect()}
-          topView={topViewItemData}
+          topViewData={topViewData}
           districts={medDistricts}
           handleCumulativeClick={handleCumulativeButtonClick}
-          cumulative={showCumulative}
+          cumulativeInfections={cumulativeInfections}
+          cumulativeExitus={cumulativeExitus}
           districtToShow={districtToShow}
           districtChange={handleDistrictChange}
           viewSelect={viewSelect}

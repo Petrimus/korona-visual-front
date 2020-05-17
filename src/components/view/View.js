@@ -3,7 +3,6 @@ import { Loader } from 'semantic-ui-react'
 
 import ViewTop from './ViewTop'
 import InfectionsView from './InfectionsView'
-import HospitalisedView from './HospitalisedView'
 import ExitusView from './ExitusView'
 import { ViewLayout } from '../styles/appLayouts'
 import BasicBarchart from '../charts/BasicBarchart'
@@ -11,10 +10,11 @@ import BasicBarchart from '../charts/BasicBarchart'
 const View = ({
   active,
   data,
-  topView,
+  topViewData,
   districts,
   handleCumulativeClick,
-  cumulative,
+  cumulativeExitus,
+  cumulativeInfections,
   districtChange,
   districtToShow,
   viewSelect
@@ -22,8 +22,7 @@ const View = ({
   // console.log('topview ',topView)
   // console.log('topview ', props.topView[2])
   // console.log('view viewSelect', viewSelect)
-  console.log('data', data)
-
+  //  console.log('data', data)
 
   const viewToShow = () => {
     if (viewSelect === 'infections') {
@@ -32,7 +31,7 @@ const View = ({
           data={data}
           districts={districts}
           handleCumulativeClick={handleCumulativeClick}
-          cumulative={cumulative}
+          cumulative={cumulativeInfections}
           districtChange={districtChange}
           districtToShow={districtToShow}
         />
@@ -42,7 +41,11 @@ const View = ({
       return <BasicBarchart data={data} />
 
     } else if (viewSelect === 'exitus') {
-      return <ExitusView />
+      return <ExitusView
+        data={data}
+        handleCumulativeClick={handleCumulativeClick}
+        cumulative={cumulativeExitus}
+      />
     }
   }
 
@@ -57,7 +60,7 @@ const View = ({
   if (!active) {
     return (
       <ViewLayout>
-        <ViewTop topView={topView} />
+        <ViewTop topView={topViewData} />
         {viewToShow()}
       </ViewLayout >
     )
