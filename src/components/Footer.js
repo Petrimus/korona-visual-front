@@ -7,10 +7,11 @@ const Footer = () => (
   <FooterLayout>
     <StyledFooter>
       <div>
-        github: petrimus.github.com
+        github:
+        <a href='https://github.com/Petrimus/korona-visual'> Github/Petrimus</a>
       </div>
       <div>
-        MIT licence
+        Licence: MIT
       </div>
       <div>
         Source: HS korona api
