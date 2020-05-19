@@ -8,7 +8,7 @@ const Header = () => (
   <HeaderLayout >
     <StyledHeader>
       <HeaderText>
-        Korona-info
+        Korona-Visual
       </HeaderText>
     </StyledHeader>
   </HeaderLayout>

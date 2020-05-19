@@ -64,7 +64,7 @@ const App = () => {
       }
 
     } else if (viewSelect === 'hospitalised') {
-      return hospitalisedData.slice(hospitalisedData.length - 21, hospitalisedData.length - 1)
+      return hospitalisedData.slice(hospitalisedData.length - 20, hospitalisedData.length)
 
     } else if (viewSelect === 'exitus') {
       if (!cumulativeExitus) {
@@ -89,7 +89,7 @@ const App = () => {
   }
 
   // console.log('view select', viewSelect)
-  // console.log('hospitalised', hospitalisedData)
+  console.log('hospitalised', hospitalisedData)
   // console.log('exitus data ', exitusData)
   // console.log('infections ', infectionData)
   // console.log('hook top view ', topViewData)

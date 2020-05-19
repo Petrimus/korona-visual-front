@@ -6,6 +6,7 @@ import InfectionsView from './InfectionsView'
 import ExitusView from './ExitusView'
 import { ViewLayout } from '../styles/appLayouts'
 import BasicBarchart from '../charts/BasicBarchart'
+import ChartBox from '../charts/ChartBox'
 
 const View = ({
   active,
@@ -38,8 +39,13 @@ const View = ({
       )
 
     } else if (viewSelect === 'hospitalised') {
-      return <BasicBarchart data={data} />
-
+      return (
+        <ChartBox
+          title='Sairaalahoidossa'
+        >
+          <BasicBarchart data={data} />
+        </ChartBox>
+      )
     } else if (viewSelect === 'exitus') {
       return <ExitusView
         data={data}

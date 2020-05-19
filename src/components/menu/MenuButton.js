@@ -24,7 +24,7 @@ const StyledMenuButton = styled.button`
   max-width: 200px;
   height: 100px;  
   padding: 0.3em 1.3em;
-  margin:1em 1.5em 0em 1em;  
+  margin:1em 1.5em 1em 1em;  
   box-sizing: border-box;
   border-radius: 10px;   
   font-weight: 300;
