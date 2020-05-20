@@ -27,25 +27,19 @@ const InfectionView = ({
   const chartToShow = () => {
     if (cumulative) {
       return (
-        <ChartBox
-          title={`Kumulatiiviset artunnat [${districtToShow}]`}
-        >
-          <BasicAreaChart
-            data={showAll ? data : data.slice(data.length - 80, data.length)}
-          />
-        </ChartBox>
+        <BasicAreaChart
+          data={showAll ? data : data.slice(data.length - 80, data.length)}
+          labelValue='Tartunnat kpl.'
+          mainLineName='Tartunnat'
+        />
       )
     } else {
       return (
-        < ChartBox
-          title={`Tartunnat [${districtToShow}]`}
-        >
-          <BasicLinechart
-            data={showAll ? data : data.slice(data.length - 80, data.length)}
-            labelValue='Tartunnat kpl.'
-            mainLineName='Tartunnat'
-          />
-        </ChartBox>
+        <BasicLinechart
+          data={showAll ? data : data.slice(data.length - 80, data.length)}
+          labelValue='Tartunnat kpl.'
+          mainLineName='Tartunnat'
+        />
       )
     }
   }
@@ -66,7 +60,7 @@ const InfectionView = ({
           color='violet'
           onClick={handleCumulativeClick('infections')}
         >
-          {cumulative ? 'Yksittäin' :'Kumulatiivenen'}
+          {cumulative ? 'Yksittäin' : 'Kumulatiivenen'}
         </StandardButton>
         <StandardButton
           color='violet'
@@ -75,7 +69,11 @@ const InfectionView = ({
           {showAll ? 'Viimeiset 80 pv' : 'Koko sarja'}
         </StandardButton>
       </StyledViewOptions>
-      {chartToShow()}
+      <ChartBox
+        title={`Kumulatiiviset artunnat [${districtToShow}]`}
+      >
+        {chartToShow()}
+      </ChartBox>
     </React.Fragment>
   )
 }

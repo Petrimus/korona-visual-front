@@ -18,8 +18,6 @@ const BasicLinechart = ({ data, labelValue, mainLineName }) => {
           type='number'
           dataKey='date'
           scale='time'
-          /* tickCount={10} */
-          /* interval={0} */
           domain={['adataMinuto', 'dataMax']}
           angle={-40}
           tickFormatter={(unixTime) => moment(unixTime).format('MMM-DD')}

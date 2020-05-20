@@ -23,25 +23,19 @@ const ExitusView = ({
   const chartToShow = () => {
     if (cumulative) {
       return (
-        <ChartBox
-          title={'Kumulatiiviset kuolemat'}
-        >
-          <BasicAreaChart
-            data={showAll ? data : data.slice(data.length - 80, data.length)}
-          />
-        </ChartBox>
+        <BasicAreaChart
+          data={showAll ? data : data.slice(data.length - 80, data.length)}
+          labelValue='Kuolleet kpl.'
+          mainLineName='Kuolleet'
+        />
       )
     } else {
       return (
-        < ChartBox
-          title={'Kuolemat'}
-        >
-          <BasicLinechart
-            data={showAll ? data : data.slice(data.length - 80, data.length)}
-            labelValue='Kuolleet kpl.'
-            mainLineName='Kuolleet'
-          />
-        </ChartBox>
+        <BasicLinechart
+          data={showAll ? data : data.slice(data.length - 80, data.length)}
+          labelValue='Kuolleet kpl.'
+          mainLineName='Kuolleet'
+        />
       )
     }
   }
@@ -64,7 +58,11 @@ const ExitusView = ({
           {showAll ? 'Viimeiset 80 pv' : 'Koko sarja'}
         </StandardButton>
       </StyledViewOptions>
-      {chartToShow()}
+      <ChartBox
+        title={'Kuolemat kpl.'}
+      >
+        {chartToShow()}
+      </ChartBox>
     </React.Fragment>
   )
 }

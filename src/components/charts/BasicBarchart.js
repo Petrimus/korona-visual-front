@@ -6,14 +6,13 @@ import { ResponsiveContainer, Bar, BarChart, XAxis, YAxis, Legend, Tooltip, Cart
 const BasicBarchart = ({ data }) => {
 
   return (
-    <ResponsiveContainer width={'99%'} height={500}>
+    <ResponsiveContainer width={'99%'} height={550}>
       <BarChart
         data={data}
-        margin={{ top: 10, right: 30, left: 30, bottom: 30 }}
+        margin={{ top: 10, right: 30, left: 30, bottom: 60 }}
       >
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis
-          interval={0}
           dataKey='date'
           angle={-40}
           tickFormatter={(unixTime) => moment(unixTime).format('MMM-DD')}
@@ -22,6 +21,7 @@ const BasicBarchart = ({ data }) => {
         />
         <YAxis
           dataKey='totalHospitalised'
+          domain={[0, dataMax => Math.round((dataMax + 30) / 10) * 10]}
         />
         <Tooltip
           labelFormatter={(unixTime) => moment(unixTime).format('MMM-DD')}
