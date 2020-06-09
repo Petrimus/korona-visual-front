@@ -70,7 +70,7 @@ const InfectionView = ({
         </StandardButton>
       </StyledViewOptions>
       <ChartBox
-        title={`Kumulatiiviset artunnat [${districtToShow}]`}
+        title={`Kumulatiiviset tartunnat [${districtToShow}]`}
       >
         {chartToShow()}
       </ChartBox>
