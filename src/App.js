@@ -23,6 +23,8 @@ const App = () => {
 
   useEffect(() => {
     dataServices.getData().then(data => {
+      console.log('data ', data)
+
       setInfectionData(data)
       setMedDistricts(functionUtils.isolateMedicalDictricts(data))
       setLoading(false)
@@ -31,6 +33,8 @@ const App = () => {
 
   useEffect(() => {
     dataServices.getHospitalisedData().then(data => {
+      // console.log('data ', data)
+
       setHospitalisedData(data)
     })
   }, [])
@@ -88,12 +92,7 @@ const App = () => {
     setViewSelect(value)
   }
 
-  // console.log('view select', viewSelect)
-  console.log('hospitalised', hospitalisedData)
-  // console.log('exitus data ', exitusData)
-  // console.log('infections ', infectionData)
-  // console.log('hook top view ', topViewData)
-  // console.log('exitus ', exitusData)
+  // console.log('hospitalised', hospitalisedData)
 
   console.log('app render')
 

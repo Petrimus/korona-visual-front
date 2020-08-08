@@ -37,7 +37,7 @@ const getDiffMovingAvg = (data) => {
     }
 
     for (let j = 7; j < 14; j++) {
-      sum1 += data[lastIndex - j].value
+      sum2 += data[lastIndex - j].value
     }
 
     const avg1 = Math.round(sum1 / 7)

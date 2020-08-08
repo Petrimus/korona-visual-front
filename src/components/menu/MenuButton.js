@@ -2,8 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 const MenuButton = ({ handleOptionChange, value, children, pressed }) => {
-  console.log('pressed ', pressed)
-
+  // console.log('pressed ', pressed)
 
   return (
     <StyledMenuButton
