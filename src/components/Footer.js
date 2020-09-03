@@ -4,20 +4,19 @@ import { StyledFooter } from './styles/StyledFooter'
 import { FooterLayout } from './styles/appLayouts'
 
 const Footer = () => (
-  <FooterLayout>
-    <StyledFooter>
-      <div>
-        Github:
-        <a href='https://github.com/Petrimus/korona-visual'> Github/Petrimus</a>
-      </div>
-      <div>
-        Licence: MIT
-      </div>
-      <div>
-        Source: HS korona api
-      </div>
-    </StyledFooter>
-  </FooterLayout>
+    <FooterLayout>
+        <StyledFooter>
+            <div>
+                Github:
+                <a href="https://github.com/Petrimus/korona-visual">
+                    {' '}
+                    Github/Petrimus
+                </a>
+            </div>
+            <div>Licence: MIT</div>
+            <div>Source: HS korona api</div>
+        </StyledFooter>
+    </FooterLayout>
 )
 
 export default Footer

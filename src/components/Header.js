@@ -5,19 +5,17 @@ import { StyledHeader } from './styles/StyledHeader'
 import { HeaderLayout } from './styles/appLayouts'
 
 const Header = () => (
-  <HeaderLayout >
-    <StyledHeader>
-      <HeaderText>
-        Korona-Visual
-      </HeaderText>
-    </StyledHeader>
-  </HeaderLayout>
+    <HeaderLayout>
+        <StyledHeader>
+            <HeaderText>Korona-Visual</HeaderText>
+        </StyledHeader>
+    </HeaderLayout>
 )
 
 export default Header
 
 const HeaderText = styled.h1`
-  color: ${props => props.theme.whiteSmoke};
-  font-size: 36px;
-  font-weight: bold;
+    color: ${(props) => props.theme.whiteSmoke};
+    font-size: 36px;
+    font-weight: bold;
 `
